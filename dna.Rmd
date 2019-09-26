@@ -1,0 +1,22 @@
+---
+title: "SEQUENCE OUTPUT TEST"
+author: "GSI Bioinformatic Support"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+```{r seq, echo=TRUE, warning=FALSE, }
+
+library(knitr)
+library(Biostrings)
+library(seqinr)
+fasta<-"ref/lfPVT-S5000.fasta"
+seq<-as.character(readDNAStringSet(fasta))
+
+
+linelength<-30
+seqdf<-as.data.frame(splitseq(s2c(seq),word=linelength))
+colnames(seqdf)<-NULL
+rownames(seqdf)<-seq(from=1,by=linelength,length.out=dim(seqdf)[1])
+kable(seqdf,row.names=T)
+```
