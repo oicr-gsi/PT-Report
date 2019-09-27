@@ -5,8 +5,10 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 ---
 
-```{r seq, echo=FALSE, warning=FALSE, comment=NA, }
+```{r seq, echo=TRUE, warning=FALSE, comment=NA, fig.align='left'}
 library(knitr)
+
+
 
 
 formatDNA<-function(fasta.file){
@@ -28,7 +30,7 @@ formatDNA<-function(fasta.file){
 
 fasta.file<-"dna.fasta"
 dna<-formatDNA(fasta.file)
-dna
+print(dna,right=FALSE)
 
 
 ```
