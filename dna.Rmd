@@ -5,18 +5,30 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 ---
 
-```{r seq, echo=TRUE, warning=FALSE, }
-
+```{r seq, echo=FALSE, warning=FALSE, comment=NA, }
 library(knitr)
-library(Biostrings)
-library(seqinr)
-fasta<-"ref/lfPVT-S5000.fasta"
-seq<-as.character(readDNAStringSet(fasta))
 
 
-linelength<-30
-seqdf<-as.data.frame(splitseq(s2c(seq),word=linelength))
-colnames(seqdf)<-NULL
-rownames(seqdf)<-seq(from=1,by=linelength,length.out=dim(seqdf)[1])
-kable(seqdf,row.names=T)
+formatDNA<-function(fasta.file){
+  dna<-scan(fasta.file,what="character")
+  dna<-dna[-1]
+  dna<-paste(dna,collapse="")
+
+  dna.lines<-strsplit(dna, '(?<=.{60})', perl = TRUE)[[1]]
+  ### set the positions
+  n<-60
+  names(dna.lines)<-seq(from=1,by=n,length.out=length(dna.lines))
+  dna.df<-as.data.frame(dna.lines)
+
+  dna.chunked<-apply(dna.df,1,function(x){paste(strsplit(x, "(?<=.{10})", perl = TRUE)[[1]],collapse=" ")})
+  dna.chunked.df<-as.data.frame(dna.chunked)
+  colnames(dna.chunked.df)<-NULL
+  dna.chunked.df
+}
+
+fasta.file<-"dna.fasta"
+dna<-formatDNA(fasta.file)
+dna
+
+
 ```
