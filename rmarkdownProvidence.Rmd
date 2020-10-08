@@ -1,6 +1,6 @@
 ---
 title: |
-  ![](/u/ysundaravadanam/git/providencePipeline/OICR.png){width=1in}
+  ![](./OICR.png){width=1in}
 
   Providence Therapeutics Report
 author: "GSI Bioinformatic Support"
