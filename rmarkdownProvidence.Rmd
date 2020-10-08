@@ -3,7 +3,7 @@ title: |
   ![](./OICR.png){width=1in}
 
   Providence Therapeutics Report
-author: "GSI Bioinformatic Support"
+author: "GSI Bioinformatics Support"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 params:
