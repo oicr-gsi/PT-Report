@@ -1,5 +1,4 @@
 use strict;
-use warnings;
 use JSON::PP;
 use Data::Dumper;
 use File::Basename;
@@ -63,7 +62,7 @@ $rounded                       = $rounded . "%";
 $info{"Stats"}{MappedPercent}  = $rounded;
 $info{"Stats"}{MeanReadLength} = $sam[2];
 $info{"Stats"}{MeanInsertSize} = $sam[3];
-$info{"Stats"}{InserSizeSD}    = $sam[4];
+$info{"Stats"}{InsertSizeSD}    = $sam[4];
 
 #depth and error percent calculation
 my @data = `cat $vcf`;
@@ -103,7 +102,7 @@ $info{"ErrorPercent"} = $round;
 
 my @depth = `cat depth.txt`;
 open( my $fh2, '>', 'error_gt_1.0.txt' );
-print $fh2 "Position\tnDepth\tFiltered\tError\tError_Percent\n";
+print $fh2 "Position\tDepth\tFiltered\tError\tError_Percent\n";
 
 my ( $zero, $point02, $point03, $point04, $point05, $one, $gtone ) = 0;
 foreach my $line (@depth) {
