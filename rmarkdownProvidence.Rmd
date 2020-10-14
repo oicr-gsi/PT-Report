@@ -102,7 +102,7 @@ library(kableExtra)
 
 get_summary_table<-function(s){
   summary<-as.data.frame(unlist(s))
-  s_data<-summary[c("RawReads","AdapterTrimmedReads", "AdapterTrimmedBases","PassedReads", "MappedReads", "MappedPercent", "MeanReadLength", "MeanInsertSize", "InsertSizeSD"),,drop=F]
+  s_data<-summary[c("RawReads","QualityTrimmedReads","QualityTrimmedBases", "AdapterTrimmedReads", "AdapterTrimmedBases","TrimmedByOverlapReads", "TrimmedByOverlapBases", "TotalReadsRemoved","TotalBasesRemoved", "PassedReads", "MappedReads", "MappedPercent", "MeanReadLength", "MeanInsertSize", "InsertSizeSD"),,drop=F]
   s.df<-data.frame(V1=rownames(s_data),V2=s_data[,1])
 
   return(s.df)
@@ -111,6 +111,7 @@ get_summary_table<-function(s){
 summary_table<-get_summary_table(info$Stats)
 kable(summary_table, col.names = NULL, row.names = FALSE, "latex", booktabs = T)
 ```
+\leavevmode\newline
 ##  \textcolor{blue}{Read Length Distribution}
 
 ```{r read_dist, echo=FALSE, out.width = '80%'}
@@ -256,6 +257,14 @@ Paired-end: Two ends of the same DNA molecule
 \newline
 PassedReads: Total number of reads used in the analysis
 \newline
+QualityTrimmedReads: Number of reads less than Q10
+\newline
+QualityTrimmedBases: Number of bases less than Q10
+\newline
 RawReads: Total number of raw reads
+\newline
+TotalReadsRemoved: Number of reads removed from the analysis
+\newline
+TotalBasesRemoved: Number of bases removed from the analysis 
 \newline
 Score: A numerical value that describes the overall quality of an alignment. Higher numbers correspond to higher similarity.

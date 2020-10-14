@@ -23,16 +23,49 @@ foreach my $line (@trimStats) {
         chomp $rawReads;
         $info{"Stats"}{RawReads} = $rawReads;
     }
+    if ( $line =~ /^QTrimmed:/ ) {
+        my @data                = split( "\t", $line );
+        my $qTrimmedReads = $data[1];
+        my $qTrimmedBases = $data[2];
+        $qTrimmedReads =~ s/reads//;
+        $qTrimmedBases =~ s/bases//;
+        chomp $qTrimmedReads;
+        chomp $qTrimmedBases;
+        $info{"Stats"}{QualityTrimmedReads} = $qTrimmedReads;
+        $info{"Stats"}{QualityTrimmedBases} = $qTrimmedBases;
+    }
+    if ( $line =~ /^KTrimmed:/ ) {
+        my @data                = split( "\t", $line );
+        my $kTrimmedReads = $data[1];
+        my $kTrimmedBases = $data[2];
+        $kTrimmedReads =~ s/reads//;
+        $kTrimmedBases =~ s/bases//;
+        chomp $kTrimmedReads;
+        chomp $kTrimmedBases;
+        $info{"Stats"}{AdapterTrimmedReads} = $kTrimmedReads;
+        $info{"Stats"}{AdapterTrimmedBases} = $kTrimmedBases;
+    }
+		if ( $line =~ /^Trimmed by overlap: / ) {
+        my @data                = split( "\t", $line );
+        my $tTrimmedReads = $data[1];
+        my $tTrimmedBases = $data[2];
+        $tTrimmedReads =~ s/reads//;
+        $tTrimmedBases =~ s/bases//;
+        chomp $tTrimmedReads;
+        chomp $tTrimmedBases;
+        $info{"Stats"}{TrimmedByOverlapReads} = $tTrimmedReads;
+        $info{"Stats"}{TrimmedByOverlapBases} = $tTrimmedBases;
+    }
     if ( $line =~ /^Total Removed:/ ) {
         my @data                = split( "\t", $line );
-        my $adapterTrimmedReads = $data[1];
-        my $adapterTrimmedBases = $data[2];
-        $adapterTrimmedReads =~ s/reads//;
-        $adapterTrimmedBases =~ s/bases//;
-        chomp $adapterTrimmedReads;
-        chomp $adapterTrimmedBases;
-        $info{"Stats"}{AdapterTrimmedReads} = $adapterTrimmedReads;
-        $info{"Stats"}{AdapterTrimmedBases} = $adapterTrimmedBases;
+        my $totalTrimmedReads = $data[1];
+        my $totalTrimmedBases = $data[2];
+        $totalTrimmedReads =~ s/reads//;
+        $totalTrimmedBases =~ s/bases//;
+        chomp $totalTrimmedReads;
+        chomp $totalTrimmedBases;
+        $info{"Stats"}{TotalReadsRemoved} = $totalTrimmedReads;
+        $info{"Stats"}{TotalBasesRemoved} = $totalTrimmedBases;
     }
 }
 
