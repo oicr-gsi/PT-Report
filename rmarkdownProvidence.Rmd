@@ -88,7 +88,7 @@ The DNA construct was sequenced and a consensus sequence was generated from the 
 
 `r if(show_construct){"Please refer to the "}`
 `r if(show_construct){params$construct}`
-`r if(show_construct){" for more information"}`
+`r if(show_construct){" report for more information"}`
 
 \fontfamily{lmr}\selectfont
 ## \textcolor{blue}{Sequencing Summary}
